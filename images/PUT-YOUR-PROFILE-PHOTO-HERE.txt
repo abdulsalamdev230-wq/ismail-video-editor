@@ -1,0 +1,19 @@
+PUT YOUR PROFILE PHOTO HERE
+===========================
+
+File name:  profile.png        (or keep .png and save it as-is)
+
+Recommended:
+- Professional headshot / upper-body portrait
+- Roughly 1000 x 1220 px (a ~1 : 1.2 portrait ratio)
+- PNG or JPG (JPG is smaller; just keep the name "profile.png" in data.js or update js/data.js)
+
+When this file exists, the website automatically shows your photo in:
+  1. the HERO panel (right side, with cinematic purple lighting)
+  2. the ABOUT section (same treatment)
+  3. the small avatar next to the hero eyebrow
+
+Until you add it, visitors simply see the labelled placeholder — no fake photo is ever shown.
+
+Your thumbnails and covers can live in this folder too:
+  images/my-video-cover.jpg   →  set thumbnail: "images/my-video-cover.jpg" in js/data.js
