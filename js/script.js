@@ -188,6 +188,7 @@
   ──────────────────────────────────────────────────────────── */
   const LIST = typeof PROJECTS !== "undefined" ? PROJECTS : [];
 
+  /* ── gallery thumbnail helpers ── */
   function thumbHTML(p) {
     if (p.thumbnail) return `<img src="${esc(p.thumbnail)}" alt="${esc(p.title)} — video thumbnail" loading="lazy" />`;
     return `<div class="ph-art" aria-hidden="true"><span class="ph-art__glyph">${CLAP_ICON}</span></div>`;
@@ -206,7 +207,7 @@
             ${p.duration ? `<span class="badge mono">${esc(p.duration)}</span>` : ""}
             ${p.placeholder ? `<span class="badge badge--ph">Placeholder</span>` : ""}
           </div>
-          <span class="film-card__centerplay" aria-hidden="true"><span></span></span>
+          <span class="film-card__centerplay" aria-hidden="true"></span>
         </div>
         <div class="film-card__body">
           <span class="film-card__cat">${esc(CATS[p.category] || p.category)}</span>

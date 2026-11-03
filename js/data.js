@@ -10,11 +10,9 @@
    "reels"      → Reels & Shorts
    "youtube"    → YouTube Videos
    "ads"        → Social Media Ads
-   "grading"    → Color Grading
-   "motion"     → Motion Graphics
 
    ── HOW TO ADD A VIDEO PROJECT ────────────────────────────────
-   Copy any object inside PROJECTS, paste it at the end of the
+   Copy any object inside PROJECTS, paste at the end of the
    list (before `];`) and change the values:
 
    {
@@ -31,7 +29,7 @@
    Both mp4 and youtube may be set — the player prefers MP4.
    Put media inside the /images and /video folders.
    ✦ Empty fields show elegant labelled placeholders — never faked.
-   ═══════════════════════════════════════════════════════════════ */
+   ═════════════════════════════════════════════════════════════ */
 
 /* ── YOUR PROFILE ─────────────────────────────────────────────
    Drop your real portrait at  images/profile.png  — the hero and
@@ -49,70 +47,271 @@ const SHOWREEL = {
   title: "2026 — The Showreel",
   description:
     "One screen. Every skill. A fast-cut journey through my editing — pacing, transitions, colour and sound working as one.",
-  duration: "",    // e.g. "1:52" (optional)
-  thumbnail: "",   // e.g. "images/showreel-cover.jpg"
-  mp4: "",         // e.g. "video/showreel.mp4"
-  youtube: "",     // or a YouTube watch link
+  duration: "",   // e.g. "0:52"
+  thumbnail: "", // e.g. "images/showreel-cover.jpg"
+  mp4: "",       // e.g. "video/showreel.mp4"
+  youtube: "",   // or a YouTube watch link
 };
 
 /* ── 2. VIDEO PROJECTS ──────────────────────────────────────── */
 const PROJECTS = [
-  // ✦✦✦ PLACEHOLDER ENTRIES — replace with your real work ✦✦✦
+  // ═══════════════════════════════════════════════════════
+  // REAL VIDEOS — Muhammad Ismail's Google Drive,
+  // folder: 1oC0Ih5R1qi8OY0crkls0eAiAGBcBHoJ4
+  // ═══════════════════════════════════════════════════════
+
+  // ── Cinematic Editing ──────────────────────────────────
   {
-    id: "ph-cinematic",
-    placeholder: true,
-    title: "Cinematic Short Film Cut",
+    id: "ventora-modular-sofa",
+    title: "Ventora Modular Sofa — Cinematic Room Tour",
     category: "cinematic",
-    description: "Story-driven sequencing, graded frames and emotional pacing — editing that serves the feeling.",
-    duration: "", thumbnail: "", mp4: "", youtube: "",
+    description: "Product styling, clean pacing and moody lighting for an e-commerce showcase.",
+    duration: "0:38",
+    thumbnail: "", mp4: "", youtube: "",
   },
   {
-    id: "ph-reels-01",
-    placeholder: true,
-    title: "Reel — Lifestyle Edit",
+    id: "the-ancient-lime-clove-tonic",
+    title: "THE ANCIENT “LIME & CLOVE” TONIC 🍋☕️",
+    category: "cinematic",
+    description: "A bold, texture-led cinematic edit with a flavorful arc.",
+    duration: "0:37",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "srene-ai-video",
+    title: "SRENE AI VIDEO",
+    category: "cinematic",
+    description: "AI-assisted visual with a hypnotic, cinematic rhythm.",
+    duration: "0:24",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "vayora-pillow",
+    title: "VAYORA PILLOW — Elevate the Moment",
+    category: "cinematic",
+    description: "Product cinematography that makes comfort feel premium.",
+    duration: "0:32",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "t-shirt",
+    title: "T-shirt 👕 — Product Cinematic",
+    category: "cinematic",
+    description: "A clean, product-forward cinematic look for apparel.",
+    duration: "0:26",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+
+  // ── Reels & Shorts ─────────────────────────────────────
+  {
+    id: "neon-coder-reel",
+    title: "NEON CODER REEL",
     category: "reels",
-    description: "Vertical, fast and rhythmic — punchy cuts, trending sound sync and captions that move.",
-    duration: "", thumbnail: "", mp4: "", youtube: "",
+    description: "Fast, neon-lit vertical edit made for algorithmic feeds.",
+    duration: "0:22",
+    thumbnail: "", mp4: "", youtube: "",
   },
   {
-    id: "ph-reels-02",
-    placeholder: true,
-    title: "Reel — Product Promo",
+    id: "asphalt-jazz-reel",
+    title: "ASPHALT JAZZ REEL",
     category: "reels",
-    description: "Commercial-ready vertical cut with kinetic text and seamless beat-matched transitions.",
-    duration: "", thumbnail: "", mp4: "", youtube: "",
+    description: "Beat-synced street footage for short-form scrolling.",
+    duration: "0:26",
+    thumbnail: "", mp4: "", youtube: "",
   },
   {
-    id: "ph-youtube",
-    placeholder: true,
-    title: "YouTube — Long-Form Edit",
+    id: "grandpaws-sit-with-kids",
+    title: "GRANDPAWS SITTING WITH KIDS 😂",
+    category: "reels",
+    description: "Quirky, meme-paced reel built for shares and laughs.",
+    duration: "0:29",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "cute-puppy-reel",
+    title: "CUTE PUPPY REEL 🐶",
+    category: "reels",
+    description: "Playful, high-retention pet footage with quick cuts.",
+    duration: "0:31",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "music-reverb-reel",
+    title: "MUSIC REVERB REEL",
+    category: "reels",
+    description: "Sound-reactive edits that punch on mute and vibrate on audio.",
+    duration: "0:23",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "spirit-box-reel",
+    title: "SPIRIT BOX REEL",
+    category: "reels",
+    description: "Edgy, neon-drenched short-form cut for a music brand.",
+    duration: "0:25",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+
+  // ── YouTube Editing ────────────────────────────────────
+  {
+    id: "sakubi-dating-reel",
+    title: "Saki Bi Dating Reel",
     category: "youtube",
-    description: "Retention-focused edit: strong hooks, b-roll overlays, sound design and clean pacing.",
-    duration: "", thumbnail: "", mp4: "", youtube: "",
+    description: "Long-form dating documentary piece — pacing built for retention.",
+    duration: "0:48",
+    thumbnail: "", mp4: "", youtube: "",
   },
   {
-    id: "ph-ads",
-    placeholder: true,
-    title: "Social Media Ad Campaign",
+    id: "sakubi-rental-car-reel",
+    title: "Saki Bi Rental Car Reel",
+    category: "youtube",
+    description: "Brand-driven narrative edit for a rental-car campaign.",
+    duration: "0:52",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+
+  // ── Promotional / Social Media Ads ─────────────────────
+  {
+    id: "the-kaizen-effect-ad",
+    title: "The Kaizen Effect — Ad Cut",
     category: "ads",
-    description: "Scroll-stopping ad cut — bold first three seconds, product-forward structure, polished finish.",
-    duration: "", thumbnail: "", mp4: "", youtube: "",
+    description: "Scroll-stopping ad with a strong hook, product-forward structure, finished polish.",
+    duration: "0:34",
+    thumbnail: "", mp4: "", youtube: "",
   },
   {
-    id: "ph-grading",
-    placeholder: true,
-    title: "Color Grade — Before & After",
-    category: "grading",
-    description: "Balanced exposure, filmic tonality and mood-driven grading — the same shot, a different feeling.",
-    duration: "", thumbnail: "", mp4: "", youtube: "",
+    id: "alexa-golden-mist-ad",
+    title: "Alexa Golden Mist — Ad Cut",
+    category: "ads",
+    description: "Product-forward commercial edit with sleek motion and clean finish.",
+    duration: "0:39",
+    thumbnail: "", mp4: "", youtube: "",
   },
   {
-    id: "ph-motion",
-    placeholder: true,
-    title: "Motion Graphics Titles",
-    category: "motion",
-    description: "Animated titles, transitions and clean graphic moments that make an edit feel finished.",
-    duration: "", thumbnail: "", mp4: "", youtube: "",
+    id: "fast-reboot-ad",
+    title: "Fast Reboot — Ad Cut",
+    category: "ads",
+    description: "High-impact promo built to arrest attention in the first three seconds.",
+    duration: "0:28",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "the-early-hour-ad",
+    title: "The Early Hour — Ad Cut",
+    category: "ads",
+    description: "Tension-led promotional edit with a clear call to action.",
+    duration: "0:36",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "amix-absorb-ad",
+    title: "Amix Absorb — Ad Cut",
+    category: "ads",
+    description: "Minimal, confident anti-waste pitch for social platforms.",
+    duration: "0:31",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+
+  // ── Promotional / Social Media Ads (reels) ─────────────
+  {
+    id: "the-adam-kitchen-table-ad",
+    title: "The Adam Kitchen Table Ad",
+    category: "ads",
+    description: "Product story shot on the kitchen table — intimate, direct to camera.",
+    duration: "0:26",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "the-wisdom-hub-ad",
+    title: "The Wisdom Hub Ad",
+    category: "ads",
+    description: "Story-first promotional edit with a warm, trustworthy tone.",
+    duration: "0:30",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "sakubi-studio-suv-ad",
+    title: "Saki Bi Studio SUV Ad",
+    category: "ads",
+    description: "Luxury vehicle commercial with cinematic framing and premium grade.",
+    duration: "0:41",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "sakubi-nutrition-ad",
+    title: "Saki Bi Nutrition Ad",
+    category: "ads",
+    description: "Clean, high-conversion product edit for a wellness brand.",
+    duration: "0:35",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+
+  // ── YouTube (documentary / long-form) ──────────────────
+  {
+    id: "sakubi-mountain-ing-red-carpet",
+    title: "Saki Bi Mountain Ing Red Carpet",
+    category: "youtube",
+    description: "Long-form fashion/documentary edit with interview rhythm and graded frames.",
+    duration: "0:56",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "sakubi-red-carpet-miami",
+    title: "Saki Bi Red Carpet Miami",
+    category: "youtube",
+    description: "Editorial red-carpet sequence — pacing, b-roll and sound design.",
+    duration: "0:44",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "sakubi-editors-choice",
+    title: "Saki Bi Editors Choice",
+    category: "youtube",
+    description: "Curator-style long-form with a sharp hook and clean storytelling.",
+    duration: "0:47",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "sakubi-minimizing-ransomware",
+    title: "Saki Bi Minimizing Ransomware",
+    category: "youtube",
+    description: "Explainer video with clean pacing and on-screen information hierarchy.",
+    duration: "0:42",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "sakubi-hiring",
+    title: "Saki Bi Hiring",
+    category: "youtube",
+    description: "People-first recruitment film — music-driven, warm and human.",
+    duration: "0:39",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+
+  // ── YouTube (creators / documentary) ───────────────────
+  {
+    id: "sakubi-real-housewives-south-carolina",
+    title: "Saki Bi Real Housewives South Carolina",
+    category: "youtube",
+    description: "Documentary-style edit with editing-room storytelling and music sync.",
+    duration: "0:55",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "sydney-swim-reel",
+    title: "Sydney Swim Reel",
+    category: "youtube",
+    description: "Athletic, high-energy vertical cut for short-form platforms.",
+    duration: "0:21",
+    thumbnail: "", mp4: "", youtube: "",
+  },
+  {
+    id: "sakubi-simply-instant-reel",
+    title: "Saki Bi Simply Instant Reel",
+    category: "youtube",
+    description: "Clean, fast-paced short-form piece with a crisp finish.",
+    duration: "0:24",
+    thumbnail: "", mp4: "", youtube: "",
   },
 ];
 
