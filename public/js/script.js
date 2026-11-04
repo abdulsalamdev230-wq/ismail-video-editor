@@ -115,9 +115,12 @@
       return;
     }
 
+    // Clean up any existing video elements in the modal first
+    $("#vmBody").querySelectorAll("video, iframe").forEach((el) => el.remove());
+
     let player;
     if (mp4) {
-      player = `<video src="${esc(mp4)}" controls autoplay playsinline></video>`;
+      player = `<video src="${esc(mp4)}" controls playsinline preload="none"></video>`;
     } else {
       const id = ytId(yt);
       if (!id) { toast("YouTube link format not recognised — use a normal YouTube watch link."); return; }
@@ -278,8 +281,9 @@
       const thumb = $(".film-card__thumb", card);
       if (!thumb || $(".film-card__thumb video", card)) return;
       const v = document.createElement("video");
-      v.src = mp4; v.muted = true; v.loop = true;
-      v.playsInline = true; v.autoplay = true;
+      v.src = mp4; v.muted = true; v.loop = false;
+      v.playsInline = true; v.autoplay = false;
+      v.preload = "none";
       v.setAttribute("aria-hidden", "true");
       thumb.appendChild(v);
       const p = v.play(); if (p && p.catch) p.catch(() => v.remove());

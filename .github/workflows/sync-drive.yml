@@ -1,7 +1,7 @@
 # ═══════════════════════════════════════════════════════════════
 # ISMAIL VISUALS — Google Drive → Portfolio Sync
 # Serverless GitHub Action: fetches Muhammad's Google Drive folder
-# and auto-commits a sync'd projects.js that the site renders.
+# and auto-commits a sync'd js/data.js that the site renders.
 # ═══════════════════════════════════════════════════════════════
 
 name: Sync Google Drive → Portfolio
@@ -32,13 +32,6 @@ jobs:
         with:
           credentials_json: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
 
-      - name: Generate access token
-        id: gauth
-        run: |
-          # Use the gcloud CLI to generate an access token for the service account
-          gcloud auth login --brief --update-adc || true
-          echo "auth done"
-
       - name: Install Google Drive API Python client
         run: |
           python -m pip install --upgrade pip
@@ -48,7 +41,7 @@ jobs:
         id: drive
         run: |
           python scripts/list-drive-files.py "${{ env.GDRIVE_FOLDER_ID }}" > projects.json
-          echo "FILES=$(cat projects.json | jq -r '.length') videos found" >> $GITHUB_OUTPUT
+          echo "FILES=$(python -c "import json;print(len(json.load(open('projects.json'))))" 2>/dev/null || echo 0) videos found" >> $GITHUB_OUTPUT
 
       - name: Generate projects.js
         id: gen
@@ -69,8 +62,3 @@ jobs:
           git add js/projects.js
           git commit -m "chore(sync): update Google Drive projects [skip ci]" || echo "No changes to commit"
           git push
-
-  # Also auto-deploy to GitHub Pages (keep the existing workflow running)
-  deploy:
-    needs: sync
-    uses: .github/workflows/pages.yml
