@@ -101,16 +101,26 @@
   });
 
   function ytId(src) {
-    const m = String(src || "").match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\\w-]{6,})/);
-    return m ? m[1] : (/^[\\w-]{6,}$/.test(String(src || "").trim()) ? String(src).trim() : null);
+    const m = String(src || "").match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
+    return m ? m[1] : (/^[\w-]{6,}$/.test(String(src || "").trim()) ? String(src).trim() : null);
+  }
+
+  // Google Drive file IDs may come from item.drive OR inside the legacy
+  // "mp4" field as a drive.google.com/uc?export=download&id=FILE_ID URL.
+  function driveId(item) {
+    const raw = String(item.drive || "").trim();
+    if (raw) return raw;
+    const mp4 = String(item.mp4 || "").trim();
+    const m = mp4.match(/drive\.google\.com\/(?:uc\?export=download&(?:amp;)?id=|file\/d\/)([\w-]{10,})/);
+    return m ? m[1] : null;
   }
 
   function playItem(item) {
-    const mp4 = String(item.mp4 || "").trim();
     const yt  = String(item.youtube || "").trim();
-    const drive = String(item.drive || "").trim();
+    const di  = driveId(item);
+    const mp4 = di ? "" : String(item.mp4 || "").trim(); // drive links need the preview iframe path
 
-    if (!mp4 && !yt) {
+    if (!mp4 && !yt && !di) {
       toast("This video isn’t added yet — add your video in js/data.js.");
       return;
     }
@@ -119,14 +129,21 @@
     $("#vmBody").querySelectorAll("video, iframe").forEach((el) => el.remove());
 
     let player;
-    if (mp4) {
+    if (di) {
+      // Google Drive player: the /preview iframe streams the file correctly,
+      // whereas uc?export=download gets blocked by Google's redirect page.
+      player = `<iframe src="https://drive.google.com/file/d/${esc(di)}/preview"
+        title="${esc(item.title)}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    } else if (mp4) {
       // MP4 player: autoplay, muted (to bypass autoplay restrictions),
       // playsinline (for mobile Safari/iPad), preload metadata
       player = `<video src="${esc(mp4)}" controls playsinline autoplay muted preload="metadata"></video>`;
     } else {
       const id = ytId(yt);
       if (!id) { toast("YouTube link format not recognised — use a normal YouTube watch link."); return; }
-      player = `<iframe src="https://www.youtube-nocookie.com/embed/${esc(id)}?autoplay=1&rel=0"
+      // mute=1 is required — browsers block unmuted autoplay inside iframes.
+      // The viewer can unmute with the player's volume control.
+      player = `<iframe src="https://www.youtube-nocookie.com/embed/${esc(id)}?autoplay=1&mute=1&playsinline=1&rel=0"
         title="${esc(item.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
     }
 
@@ -279,7 +296,7 @@
       const item = PROJECTS.find((x) => x.id === card.dataset.id);
       if (!item) return;
       const mp4 = String(item.mp4 || "").trim();
-      if (!mp4) return;
+      if (!mp4 || /drive\.google\.com/.test(mp4)) return; // Drive links can't stream inline
       const thumb = $(".film-card__thumb", card);
       if (!thumb || $(".film-card__thumb video", card)) return;
       const v = document.createElement("video");
@@ -339,6 +356,28 @@
   ──────────────────────────────────────────────────────────── */
   const SKILLS_CFG = typeof SKILLS !== "undefined" ? SKILLS : [];
   $("#skillChips").innerHTML = SKILLS_CFG.map((s) => `<li class="chip">${esc(s)}</li>`).join("");
+
+  /* Skills demo video — auto-synced slot (SKILL_VIDEO comes from js/data.js) */
+  const SKV     = typeof SKILL_VIDEO !== "undefined" ? SKILL_VIDEO : null;
+  const svStage = $("#skillVideoStage");
+  if (SKV && (String(SKV.mp4 || "").trim() || String(SKV.youtube || "").trim()) && svStage) {
+    $("#skillVideoThumb").innerHTML = SKV.thumbnail
+      ? `<img src="${esc(SKV.thumbnail)}" alt="${esc(SKV.title || "Skills demo")} cover" />`
+      : `<div class="ph-art" aria-hidden="true"><span class="ph-art__glyph">${ICON_PLAY.replace('width="20" height="20"', 'width="34" height="34"')}</span></div>`;
+    svStage.hidden = false;
+    const openSkill = () => playItem({
+      title: SKV.title || "CapCut Skills Demo",
+      category: "motion",
+      description: SKV.description || "A demo of my editing skills — cuts, motion and grade.",
+      mp4: SKV.mp4, youtube: SKV.youtube, duration: SKV.duration,
+    });
+    svStage.addEventListener("click", openSkill);
+    svStage.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openSkill(); }
+    });
+  } else if (svStage) {
+    svStage.hidden = true;
+  }
 
   /* ────────────────────────────────────────────────────────────
      Hero timecode (decorative clock)

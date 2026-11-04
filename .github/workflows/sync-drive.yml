@@ -1,14 +1,16 @@
 # ═══════════════════════════════════════════════════════════════
-# ISMAIL VISUALS — Google Drive → Portfolio Sync
-# Serverless GitHub Action: fetches Muhammad's Google Drive folder
-# and auto-commits a sync'd js/data.js that the site renders.
+# ISMAIL VISUALS — Google Drive → Portfolio Auto-Sync
+# Every hour the public Drive folder is scanned and js/data.js is
+# regenerated, then committed — so a new video uploaded to the
+# folder appears on the website automatically.
+# Manual trigger: Actions → "Sync Google Drive → Portfolio" → Run
 # ═══════════════════════════════════════════════════════════════
 
 name: Sync Google Drive → Portfolio
 
 on:
   schedule:
-    # Run every hour (UTC)
+    # Every hour (UTC)
     - cron: "0 * * * *"
   workflow_dispatch:   # manual trigger
   push:
@@ -16,6 +18,10 @@ on:
 
 permissions:
   contents: write
+
+concurrency:
+  group: drive-sync
+  cancel-in-progress: false
 
 env:
   GDRIVE_FOLDER_ID: "1oC0Ih5R1qi8OY0crkls0eAiAGBcBHoJ4"
@@ -27,38 +33,26 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v3
-        with:
-          credentials_json: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
+      - name: Scan Drive folder & regenerate data.js
+        run: node scripts/sync-drive.mjs
 
-      - name: Install Google Drive API Python client
+      - name: Commit synced data (if changed)
         run: |
-          python -m pip install --upgrade pip
-          pip install google-api-python-client
-
-      - name: Fetch Drive folder contents
-        id: drive
-        run: |
-          python scripts/list-drive-files.py "${{ env.GDRIVE_FOLDER_ID }}" > projects.json
-          echo "FILES=$(python -c "import json;print(len(json.load(open('projects.json'))))" 2>/dev/null || echo 0) videos found" >> $GITHUB_OUTPUT
-
-      - name: Generate projects.js
-        id: gen
-        run: |
-          python scripts/gen-data-js.py projects.json > js/projects.js
-          echo "PROJECTS_JS=$(wc -l < js/projects.js) lines written" >> $GITHUB_OUTPUT
-
-      - name: Show sync summary
-        run: |
-          echo "Sync summary:"
-          echo "- Videos found: ${{ steps.drive.outputs.FILES }}"
-          echo "- projects.js lines: ${{ steps.gen.outputs.PROJECTS_JS }}"
-
-      - name: Commit and push
-        run: |
-          git config user.name "github-actions[bot]"
+          git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add js/projects.js
-          git commit -m "chore(sync): update Google Drive projects [skip ci]" || echo "No changes to commit"
-          git push
+          git add js/data.js public/js/data.js scripts/drive-descriptions.json
+          if git diff --cached --quiet; then
+            echo "No changes since last sync"
+          else
+            git commit -m "auto(sync): refresh portfolio videos from Google Drive [skip ci]"
+            git push
+            echo "SYNCED=$(grep -c '    id:' js/data.js)" >> $GITHUB_OUTPUT
+          fi
+        id: commit
+
+      - name: Summary
+        run: |
+          echo "### Google Drive → Portfolio sync" >> $GITHUB_STEP_SUMMARY
+          echo "- Videos synced: $(grep -c '    id:' js/data.js)" >> $GITHUB_STEP_SUMMARY
+          echo "- New uploads appear automatically within an hour." >> $GITHUB_STEP_SUMMARY
+          echo "- Customise any title/description: scripts/drive-descriptions.json" >> $GITHUB_STEP_SUMMARY
