@@ -120,7 +120,9 @@
 
     let player;
     if (mp4) {
-      player = `<video src="${esc(mp4)}" controls playsinline preload="none"></video>`;
+      // MP4 player: autoplay, muted (to bypass autoplay restrictions),
+      // playsinline (for mobile Safari/iPad), and error handler
+      player = `<video src="${esc(mp4)}" controls playsinline autoplay muted preload="metadata"></video>`;
     } else {
       const id = ytId(yt);
       if (!id) { toast("YouTube link format not recognised — use a normal YouTube watch link."); return; }
