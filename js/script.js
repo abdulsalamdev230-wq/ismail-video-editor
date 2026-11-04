@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════
-   ISMAIL VISUALS — portfolio engine
-   Renders everything from js/data.js · zero dependencies
+   ISMAIL VISUALS — portfolio engine (Google Drive sync v2.0)
+   Fetches projects from the secure API (worker/projects.json)
+   Renders everything · zero dependencies · no hard-coded lists
    ═══════════════════════════════════════════════════════════════ */
 
 (() => {
@@ -14,16 +15,19 @@
   const HOVER_OK  = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   const CATS = {
-    cinematic: "Cinematic Editing",
+    cinematic: "Cinematic Films",
     reels:     "Reels & Shorts",
     youtube:   "YouTube Videos",
     ads:       "Social Media Ads",
-    grading:   "Color Grading",
-    motion:    "Motion Graphics",
+    web:       "Websites",
+    android:   "Android Apps",
+    games:     "Games",
+    other:     "Other Projects",
   };
 
   const ICON_PLAY = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
   const CLAP_ICON = '<svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path d="M3 9h18v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 19V9zm1-4 3.2 4H10L6.8 5H3.5zm6.5 0H14l3.2 4h-3.2L10.5 5zm7 0h3.6L21 9h-.8L17.5 5z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+
   const SERVICE_ICONS = {
     reel:    '<path d="M4 4h7v16H4zM13 7h7v10h-7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6.5 9l-2 3 2 3M16.5 9l-2 3 2 3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>',
     tube:    '<rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>',
@@ -38,7 +42,7 @@
   };
 
   const esc = (str = "") =>
-    String(str).replace(/[&<>"']/g, (c) => ({
+    String(str).replace(/[&<>"'']/g, (c) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
     }[c]));
 
@@ -60,6 +64,7 @@
 
   /* ────────────────────────────────────────────────────────────
      Video modal (MP4 + YouTube, fullscreen-ready)
+     Supports Drive preview iframes too.
   ──────────────────────────────────────────────────────────── */
   let activeModal = null;
   let lastFocused = null;
@@ -75,9 +80,12 @@
   function closeModal(modal) {
     modal.hidden = true;
     document.body.style.overflow = "";
-    $$("video, iframe", modal).forEach((el) => {
-      const p = el.pause && el.pause();
-      if (p && p.catch) p.catch(() => {});
+    const videos = modal.querySelectorAll("video");
+    const iframes = modal.querySelectorAll("iframe");
+    videos.forEach((el) => {
+      if (el.pause) el.pause();
+    });
+    iframes.forEach((el) => {
       if (el.tagName === "IFRAME") el.src = el.src;
     });
     activeModal = null;
@@ -93,13 +101,14 @@
   });
 
   function ytId(src) {
-    const m = String(src || "").match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
-    return m ? m[1] : (/^[\w-]{6,}$/.test(String(src || "").trim()) ? String(src).trim() : null);
+    const m = String(src || "").match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\\w-]{6,})/);
+    return m ? m[1] : (/^[\\w-]{6,}$/.test(String(src || "").trim()) ? String(src).trim() : null);
   }
 
   function playItem(item) {
     const mp4 = String(item.mp4 || "").trim();
     const yt  = String(item.youtube || "").trim();
+    const drive = String(item.drive || "").trim();
 
     if (!mp4 && !yt) {
       toast("This video isn’t added yet — add your video in js/data.js.");
@@ -142,14 +151,12 @@
     img.loading = "eager";
     img.decoding = "async";
     img.addEventListener("load", () => {
-      // photo found → real portraits everywhere, hero panel + about + mini avatar
       frames.forEach((f) => f.prepend(img.cloneNode(true)));
       const mini = $("#heroMini");
       mini.removeAttribute("data-mini-out");
       mini.src = PROFILE_CFG.image + "?v=" + Date.now();
     });
     img.addEventListener("error", () => {
-      // placeholder mode stays — labelled, never faked
       document.body.setAttribute("data-mini-hidden", "");
     });
     img.src = PROFILE_CFG.image;
@@ -184,24 +191,45 @@
   });
 
   /* ────────────────────────────────────────────────────────────
-     Portfolio (filterable)
+     Portfolio (filterable) — fetches from API
   ──────────────────────────────────────────────────────────── */
-  const LIST = typeof PROJECTS !== "undefined" ? PROJECTS : [];
+  // PROJECTS is loaded from js/data.js (committed to the repo).
+  // On GitHub Pages there is no /api/projects.json route, so we
+  // read the global PROJECTS array that data.js defines instead.
+  let isLoading = false;
 
-  /* ── gallery thumbnail helpers ── */
-  function thumbHTML(p) {
-    if (p.thumbnail) return `<img src="${esc(p.thumbnail)}" alt="${esc(p.title)} — video thumbnail" loading="lazy" />`;
-    return `<div class="ph-art" aria-hidden="true"><span class="ph-art__glyph">${CLAP_ICON}</span></div>`;
+  function fetchProjects() {
+    if (isLoading) return;
+    isLoading = true;
+    renderPortfolio();
+    isLoading = false;
   }
 
-  function cardHTML(p, i) {
+  function renderPortfolio() {
+    const grid = $("#portfolioGrid");
+    const empty = $("#gridEmpty");
+    if (!PROJECTS || PROJECTS.length === 0) {
+      grid.innerHTML = `<p class="grid-empty">No videos found yet. Your first upload will appear automatically.</p>`;
+      empty.hidden = false;
+      return;
+    }
+    grid.innerHTML = PROJECTS.map(car).join("");
+    empty.hidden = true;
+  }
+
+  function car(p) {
     const playable = String(p.mp4 || "").trim() || String(p.youtube || "").trim();
+    const drivePlayable = String(p.drive || "").trim();
+    const playable2 = playable || drivePlayable;
     return `
       <article class="film-card" data-id="${esc(p.id)}" tabindex="0" role="button"
-               data-playable="${playable ? "play video" : "video coming soon"}"
-               style="--cd:${(i % 8) * 0.07}s">
+               data-playable="${playable2 ? "play video" : "video coming soon"}">
         <div class="film-card__thumb">
-          ${thumbHTML(p)}
+          ${
+            p.thumbnail
+              ? `<img src="${esc(p.thumbnail)}" alt="${esc(p.title)} — video thumbnail" loading="lazy" />`
+              : `<div class="ph-art" aria-hidden="true"><span class="ph-art__glyph">${CLAP_ICON}</span></div>`
+          }
           <div class="film-card__badges">
             <span class="badge badge--neon">${esc(CATS[p.category] || p.category)}</span>
             ${p.duration ? `<span class="badge mono">${esc(p.duration)}</span>` : ""}
@@ -214,7 +242,7 @@
           <h3 class="film-card__title">${esc(p.title)}</h3>
           <p class="film-card__desc">${esc(p.description || "")}</p>
           <div class="film-card__row">
-            <span class="film-card__play">${ICON_PLAY} ${playable ? "Play Video" : "Video Soon"}</span>
+            <span class="film-card__play">${ICON_PLAY} ${playable2 ? "Play Video" : "Video Soon"}</span>
             ${p.duration ? `<span class="film-card__dur mono">${esc(p.duration)}</span>` : ""}
           </div>
         </div>
@@ -222,12 +250,10 @@
   }
 
   const portfolioGrid = $("#portfolioGrid");
-  portfolioGrid.innerHTML = LIST.map(cardHTML).join("");
-
   portfolioGrid.addEventListener("click", (e) => {
     const card = e.target.closest(".film-card");
     if (!card) return;
-    const item = LIST.find((x) => x.id === card.dataset.id);
+    const item = PROJECTS.find((x) => x.id === card.dataset.id);
     if (item) playItem(item);
   });
   portfolioGrid.addEventListener("keydown", (e) => {
@@ -235,7 +261,7 @@
       const card = e.target.closest(".film-card");
       if (!card) return;
       e.preventDefault();
-      const item = LIST.find((x) => x.id === card.dataset.id);
+      const item = PROJECTS.find((x) => x.id === card.dataset.id);
       if (item) playItem(item);
     }
   });
@@ -245,12 +271,14 @@
     portfolioGrid.addEventListener("mouseover", (e) => {
       const card = e.target.closest(".film-card");
       if (!card) return;
-      const item = LIST.find((x) => x.id === card.dataset.id);
-      if (!item || !String(item.mp4 || "").trim()) return;
+      const item = PROJECTS.find((x) => x.id === card.dataset.id);
+      if (!item) return;
+      const mp4 = String(item.mp4 || "").trim();
+      if (!mp4) return;
       const thumb = $(".film-card__thumb", card);
       if (!thumb || $(".film-card__thumb video", card)) return;
       const v = document.createElement("video");
-      v.src = item.mp4; v.muted = true; v.loop = true;
+      v.src = mp4; v.muted = true; v.loop = true;
       v.playsInline = true; v.autoplay = true;
       v.setAttribute("aria-hidden", "true");
       thumb.appendChild(v);
@@ -273,7 +301,7 @@
     const f = chip.dataset.filter;
     let visible = 0;
     $$(".film-card", portfolioGrid).forEach((card, i) => {
-      const item = LIST.find((x) => x.id === card.dataset.id);
+      const item = PROJECTS.find((x) => x.id === card.dataset.id);
       const show = f === "all" || (item && item.category === f);
       card.classList.toggle("is-filtered", !show);
       if (show) {
@@ -301,7 +329,7 @@
     </article>`).join("");
 
   /* ────────────────────────────────────────────────────────────
-     CapCut skill chips (non-numeric by design)
+     CapCut skill chips
   ──────────────────────────────────────────────────────────── */
   const SKILLS_CFG = typeof SKILLS !== "undefined" ? SKILLS : [];
   $("#skillChips").innerHTML = SKILLS_CFG.map((s) => `<li class="chip">${esc(s)}</li>`).join("");
@@ -464,4 +492,7 @@
   });
 
   $("#year").textContent = new Date().getFullYear();
+
+  // Start the sync engine on page load.
+  fetchProjects();
 })();
