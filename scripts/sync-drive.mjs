@@ -181,7 +181,7 @@ function dataJs(projects, items, overrides) {
    ═════════════════════════════════════════════════════════════ */
 
 const PROFILE = {
-  image: "images/profile.png",
+  image: "images/profile.jpg",
   signature: "Muhammad Ismail",
   studio: "ISMAIL VISUALS",
   role: "Professional Video Editor & CapCut Specialist",
