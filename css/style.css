@@ -664,7 +664,15 @@ input, select, textarea { font: inherit; color: inherit; }
 .film-card.is-filtered { display: none; }
 
 .film-card__thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--dark); }
-.film-card__thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+/* Shimmer while the Drive thumbnail is in flight — the card never looks empty */
+.film-card__thumb::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(100deg, rgba(255,255,255,.04) 25%, rgba(176,38,255,.13) 45%, rgba(255,255,255,.04) 65%);
+  background-size: 250% 100%;
+  animation: thumb-shimmer 1.25s linear infinite;
+}
+@keyframes thumb-shimmer { from { background-position: 130% 0; } to { background-position: -30% 0; } }
+.film-card__thumb img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
 .film-card:hover .film-card__thumb img { transform: scale(1.055); }
 .film-card__thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; }
 
@@ -1057,7 +1065,9 @@ input, select, textarea { font: inherit; color: inherit; }
 .modal__body { width: 100%; }
 
 .vm-player { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: var(--radius); overflow: hidden; }
-.vm-player video, .vm-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.vm-player video, .vm-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; z-index: 1; }
+/* Poster paints instantly while the Drive player boots, instead of a black box */
+.vm-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(3px) brightness(.45); transform: scale(1.03); }
 .vm-meta { padding: 20px 24px 26px; }
 .vm-meta__top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 16px; margin-bottom: 8px; }
 .vm-meta h3 { font-family: var(--font-sans); font-size: clamp(1.15rem, 2.4vw, 1.5rem); font-weight: 700; letter-spacing: -0.015em; }

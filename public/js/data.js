@@ -30,7 +30,7 @@ const SHOWREEL = {
   title: "2026 — The Showreel",
   description:
     "One screen. Every skill. A fast-cut journey through my editing — pacing, transitions, colour and sound working as one.",
-  thumbnail: "https://drive.google.com/thumbnail?id=1nCeusNztcXw1BTb-2wYA6flzuvN_zO9z&sz=w1200",
+  thumbnail: "https://lh3.googleusercontent.com/d/1nCeusNztcXw1BTb-2wYA6flzuvN_zO9z=w960",
   mp4: "https://drive.google.com/uc?export=download&id=1nCeusNztcXw1BTb-2wYA6flzuvN_zO9z",
 };
 
@@ -40,7 +40,7 @@ const SHOWREEL = {
 const SKILL_VIDEO = {
   title: "Animation Showcase",
   description: "Motion-graphics style edit with animated energy from start to finish.",
-  thumbnail: "https://drive.google.com/thumbnail?id=1lknfYgwPXlHYyHldIDYTcpKMizvjpg0c&sz=w1200",
+  thumbnail: "https://lh3.googleusercontent.com/d/1lknfYgwPXlHYyHldIDYTcpKMizvjpg0c=w640",
   mp4: "https://drive.google.com/uc?export=download&id=1lknfYgwPXlHYyHldIDYTcpKMizvjpg0c",
 };
 
@@ -51,7 +51,7 @@ const PROJECTS = [
     title: "Ads Sample — Brand Reel",
     category: "ads",
     description: "A sample ad reel showing brand-forward cuts and pacing.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1ZpivQ-Gl1RK4V_Ft0bPv69EUI4dRn600&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1ZpivQ-Gl1RK4V_Ft0bPv69EUI4dRn600=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1ZpivQ-Gl1RK4V_Ft0bPv69EUI4dRn600",
   },
   {
@@ -59,7 +59,7 @@ const PROJECTS = [
     title: "Animation Showcase",
     category: "motion",
     description: "Motion-graphics style edit with animated energy from start to finish.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1lknfYgwPXlHYyHldIDYTcpKMizvjpg0c&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1lknfYgwPXlHYyHldIDYTcpKMizvjpg0c=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1lknfYgwPXlHYyHldIDYTcpKMizvjpg0c",
   },
   {
@@ -67,7 +67,7 @@ const PROJECTS = [
     title: "Blend Smart — Product Ad",
     category: "ads",
     description: "Product-forward ad cut with a clean hook and crisp finish.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1EwKIcCVA-2OJ9oOAEJ-4dxf_2k48WMv2&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1EwKIcCVA-2OJ9oOAEJ-4dxf_2k48WMv2=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1EwKIcCVA-2OJ9oOAEJ-4dxf_2k48WMv2",
   },
   {
@@ -75,7 +75,7 @@ const PROJECTS = [
     title: "C.Socks — Product Ad",
     category: "ads",
     description: "Playful apparel promo built around quick, rhythmic product shots.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1TiB1u3xVnwrs8slDsJ7AUpXZ7mWrz_15&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1TiB1u3xVnwrs8slDsJ7AUpXZ7mWrz_15=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1TiB1u3xVnwrs8slDsJ7AUpXZ7mWrz_15",
   },
   {
@@ -83,7 +83,7 @@ const PROJECTS = [
     title: "Car Wash Ad — Version 1",
     category: "ads",
     description: "High-gloss automotive service ad with punchy service callouts.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1Q45ym55o94obSiNHnTpHHPGA11YDi3F2&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1Q45ym55o94obSiNHnTpHHPGA11YDi3F2=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1Q45ym55o94obSiNHnTpHHPGA11YDi3F2",
   },
   {
@@ -91,7 +91,7 @@ const PROJECTS = [
     title: "Car Wash Ad — Version 2",
     category: "ads",
     description: "Alternate cut of the car wash ad with a different pacing arc.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1BYMzZmjagMEGVvJvgaynnlmDtzcSRKSD&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1BYMzZmjagMEGVvJvgaynnlmDtzcSRKSD=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1BYMzZmjagMEGVvJvgaynnlmDtzcSRKSD",
   },
   {
@@ -99,7 +99,7 @@ const PROJECTS = [
     title: "Corvael — Product Ad",
     category: "ads",
     description: "Sleek commercial edit — premium look, snappy transitions.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1_mPqd8Nap_WcgxniaEF6UHF3Fu1RFI4a&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1_mPqd8Nap_WcgxniaEF6UHF3Fu1RFI4a=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1_mPqd8Nap_WcgxniaEF6UHF3Fu1RFI4a",
   },
   {
@@ -107,7 +107,7 @@ const PROJECTS = [
     title: "Creatine — Fitness Video Ad",
     category: "ads",
     description: "Energetic supplement promo tuned for short-form feeds.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1L4aAx1zaIrR6PTNPNgEOHJXmVddEcGQP&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1L4aAx1zaIrR6PTNPNgEOHJXmVddEcGQP=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1L4aAx1zaIrR6PTNPNgEOHJXmVddEcGQP",
   },
   {
@@ -115,7 +115,7 @@ const PROJECTS = [
     title: "Deep Collagen — AI Video Ad",
     category: "ads",
     description: "AI-assisted skincare ad with a smooth, texture-led edit.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1SqiKN-UFtKMNVUF6_e1BGGLAiLfiKbWC&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1SqiKN-UFtKMNVUF6_e1BGGLAiLfiKbWC=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1SqiKN-UFtKMNVUF6_e1BGGLAiLfiKbWC",
   },
   {
@@ -123,7 +123,7 @@ const PROJECTS = [
     title: "Female Weight Loss — Belly Ad",
     category: "ads",
     description: "Direct-response style ad with a clear before/after arc.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1T0-QhgMMKhTJWj3B7vrsvqcafzjDXw1m&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1T0-QhgMMKhTJWj3B7vrsvqcafzjDXw1m=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1T0-QhgMMKhTJWj3B7vrsvqcafzjDXw1m",
   },
   {
@@ -131,7 +131,7 @@ const PROJECTS = [
     title: "French — Ad Cut",
     category: "ads",
     description: "Stylish short-form cut with an international feel.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1tZvrkR6JJqFc6C-u43pRKtX0LuFP9Ojj&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1tZvrkR6JJqFc6C-u43pRKtX0LuFP9Ojj=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1tZvrkR6JJqFc6C-u43pRKtX0LuFP9Ojj",
   },
   {
@@ -139,7 +139,7 @@ const PROJECTS = [
     title: "Kaliqo — AI Video Ad",
     category: "ads",
     description: "Neon-lit AI campaign ad made for algorithmic feeds.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1nCeusNztcXw1BTb-2wYA6flzuvN_zO9z&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1nCeusNztcXw1BTb-2wYA6flzuvN_zO9z=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1nCeusNztcXw1BTb-2wYA6flzuvN_zO9z",
   },
   {
@@ -147,7 +147,7 @@ const PROJECTS = [
     title: "Mana Gummies — Product Ad",
     category: "ads",
     description: "Colorful gummies promo with playful transitions and a sweet finish.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1UlJQXdH78fAC3G4tosu1WvERq1uTs3Y4&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1UlJQXdH78fAC3G4tosu1WvERq1uTs3Y4=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1UlJQXdH78fAC3G4tosu1WvERq1uTs3Y4",
   },
   {
@@ -155,7 +155,7 @@ const PROJECTS = [
     title: "Oregano — AI Video Ad",
     category: "ads",
     description: "Food-forward AI ad with appetite-driven pacing.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1qHKuipWG08jDgfXfq3AH07HwPY1XVoTa&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1qHKuipWG08jDgfXfq3AH07HwPY1XVoTa=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1qHKuipWG08jDgfXfq3AH07HwPY1XVoTa",
   },
   {
@@ -163,7 +163,7 @@ const PROJECTS = [
     title: "Oregano — AI Video Ad Cut 2",
     category: "ads",
     description: "Second delivery of the oregano campaign — new rhythm, tighter cut.",
-    thumbnail: "https://drive.google.com/thumbnail?id=15pV203op-r68xWoKcI3ago4d-yko1gw7&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/15pV203op-r68xWoKcI3ago4d-yko1gw7=w480",
     mp4: "https://drive.google.com/uc?export=download&id=15pV203op-r68xWoKcI3ago4d-yko1gw7",
   },
   {
@@ -171,7 +171,7 @@ const PROJECTS = [
     title: "Parasite — Gut Lining Ad",
     category: "ads",
     description: "Wellness explainer ad with clean on-screen information hierarchy.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1D7PRUusrHm9EB35WSzgYak_yUuV-LiaE&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1D7PRUusrHm9EB35WSzgYak_yUuV-LiaE=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1D7PRUusrHm9EB35WSzgYak_yUuV-LiaE",
   },
   {
@@ -179,7 +179,7 @@ const PROJECTS = [
     title: "Ryze — AI Video Ad",
     category: "ads",
     description: "Bold AI-assisted promo with a hypnotic, cinematic rhythm.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1DiZBPvMOv9NgbIcYSmDfcjkH5qXuVjsa&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1DiZBPvMOv9NgbIcYSmDfcjkH5qXuVjsa=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1DiZBPvMOv9NgbIcYSmDfcjkH5qXuVjsa",
   },
   {
@@ -187,7 +187,7 @@ const PROJECTS = [
     title: "Script 01 — Cinematic Test",
     category: "cinematic",
     description: "Scripted cinematic test edit — graded frames and emotional pacing.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1taUhOqrMxd8CNfjM8dagVdvBdbRDEp6N&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1taUhOqrMxd8CNfjM8dagVdvBdbRDEp6N=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1taUhOqrMxd8CNfjM8dagVdvBdbRDEp6N",
   },
   {
@@ -195,7 +195,7 @@ const PROJECTS = [
     title: "Shilajit — Product Ad",
     category: "ads",
     description: "Earthy, texture-led supplement ad built for social feeds.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1h1X4fOkgskb88T4JbV3obmvT8-au8naN&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1h1X4fOkgskb88T4JbV3obmvT8-au8naN=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1h1X4fOkgskb88T4JbV3obmvT8-au8naN",
   },
   {
@@ -203,7 +203,7 @@ const PROJECTS = [
     title: "Sima Towel — Product Ad",
     category: "ads",
     description: "Soft-goods promo showing the fabric quality up close.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1AztTrIyz9ScgQ7UhU5_R2wdR6dx_qHK3&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1AztTrIyz9ScgQ7UhU5_R2wdR6dx_qHK3=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1AztTrIyz9ScgQ7UhU5_R2wdR6dx_qHK3",
   },
   {
@@ -211,7 +211,7 @@ const PROJECTS = [
     title: "SRENE AI Video",
     category: "cinematic",
     description: "AI-assisted visual with a hypnotic, cinematic rhythm.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1dS6vYLUI-nI09A6hADNt_Fv4Y7PK4zcs&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1dS6vYLUI-nI09A6hADNt_Fv4Y7PK4zcs=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1dS6vYLUI-nI09A6hADNt_Fv4Y7PK4zcs",
   },
   {
@@ -219,7 +219,7 @@ const PROJECTS = [
     title: "T-shirt 👕 — Product Cinematic",
     category: "cinematic",
     description: "A clean, product-forward cinematic look for apparel.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1S3WDoac-jEoDwY59RT5uG8_ZESg_COGL&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1S3WDoac-jEoDwY59RT5uG8_ZESg_COGL=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1S3WDoac-jEoDwY59RT5uG8_ZESg_COGL",
   },
   {
@@ -227,7 +227,7 @@ const PROJECTS = [
     title: "The Ancient ‘Lime & Clove’ Tonic 🍋☕️",
     category: "cinematic",
     description: "A bold, texture-led cinematic edit with a flavorful arc.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1jDz_10J83SejZpcPZP50nraZ0ASKPbpF&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1jDz_10J83SejZpcPZP50nraZ0ASKPbpF=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1jDz_10J83SejZpcPZP50nraZ0ASKPbpF",
   },
   {
@@ -235,7 +235,7 @@ const PROJECTS = [
     title: "Vayora Pillow — Elevate the Moment",
     category: "cinematic",
     description: "Product cinematography that makes comfort feel premium.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1XA_ITqpbQHQpOopnlN-_IesD6n58a8zM&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1XA_ITqpbQHQpOopnlN-_IesD6n58a8zM=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1XA_ITqpbQHQpOopnlN-_IesD6n58a8zM",
   },
   {
@@ -243,7 +243,7 @@ const PROJECTS = [
     title: "Ventora Modular Sofa — Cinematic Room Tour",
     category: "cinematic",
     description: "Product styling, clean pacing and moody lighting for an e-commerce showcase.",
-    thumbnail: "https://drive.google.com/thumbnail?id=10XVKqP1Jf06lab3e6IfPZRJTeXuVCi0W&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/10XVKqP1Jf06lab3e6IfPZRJTeXuVCi0W=w480",
     mp4: "https://drive.google.com/uc?export=download&id=10XVKqP1Jf06lab3e6IfPZRJTeXuVCi0W",
   },
   {
@@ -251,7 +251,7 @@ const PROJECTS = [
     title: "Vorrax Vacuum — Product Ad",
     category: "ads",
     description: "Power-forward appliance ad with sharp product beats.",
-    thumbnail: "https://drive.google.com/thumbnail?id=1Mz4pQopWkzh3aTHRlCO49yH5q9ibHEvR&sz=w1200",
+    thumbnail: "https://lh3.googleusercontent.com/d/1Mz4pQopWkzh3aTHRlCO49yH5q9ibHEvR=w480",
     mp4: "https://drive.google.com/uc?export=download&id=1Mz4pQopWkzh3aTHRlCO49yH5q9ibHEvR",
   },
 ];;

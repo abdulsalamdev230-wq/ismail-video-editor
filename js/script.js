@@ -19,6 +19,8 @@
     reels:     "Reels & Shorts",
     youtube:   "YouTube Videos",
     ads:       "Social Media Ads",
+    grading:   "Color Grading",
+    motion:    "Motion Graphics",
     web:       "Websites",
     android:   "Android Apps",
     games:     "Games",
@@ -147,8 +149,15 @@
         title="${esc(item.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
     }
 
+    // A big poster of the same thumbnail sits behind the player, so the modal
+    // shows the frame immediately instead of a black rectangle while the
+    // Drive/YouTube player downloads.
+    const poster = String(item.thumbnail || "").trim()
+      ? `<img class="vm-poster" src="${esc(String(item.thumbnail).replace(/=w\d+$/, "=w960"))}" alt="" aria-hidden="true" decoding="async" />`
+      : "";
+
     $("#vmBody").innerHTML = `
-      <div class="vm-player">${player}</div>
+      <div class="vm-player">${poster}${player}</div>
       <div class="vm-meta">
         <div class="vm-meta__top">
           <h3>${esc(item.title)}</h3>
@@ -231,7 +240,7 @@
     const grid = $("#portfolioGrid");
     const empty = $("#gridEmpty");
     if (!PROJECTS || PROJECTS.length === 0) {
-      grid.innerHTML = `<p class="grid-empty">No videos found yet. Your first upload will appear automatically.</p>`;
+      grid.innerHTML = "";
       empty.hidden = false;
       return;
     }
@@ -249,7 +258,7 @@
         <div class="film-card__thumb">
           ${
             p.thumbnail
-              ? `<img src="${esc(p.thumbnail)}" alt="${esc(p.title)} — video thumbnail" loading="lazy" />`
+              ? `<img src="${esc(p.thumbnail)}" alt="${esc(p.title)} — video thumbnail" loading="lazy" decoding="async" />`
               : `<div class="ph-art" aria-hidden="true"><span class="ph-art__glyph">${CLAP_ICON}</span></div>`
           }
           <div class="film-card__badges">

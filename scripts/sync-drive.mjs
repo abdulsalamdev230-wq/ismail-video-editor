@@ -88,6 +88,12 @@ function categoryFromName(name) {
   return "ads";
 }
 
+/* Drive's own /thumbnail endpoint costs an extra redirect hop (~150ms)
+   and the images are ~40% bigger than needed. lh3 serves the same
+   thumbnail straight from Google's image CDN, so cards paint much
+   faster. Width is capped to what the grid actually needs. */
+const thumbUrl = (id, w = 480) => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
+
 function loadOverrides() {
   if (!existsSync(DESC_FILE)) return {};
   try { return JSON.parse(readFileSync(DESC_FILE, "utf8")); } catch { return {}; }
@@ -118,7 +124,7 @@ function skillVideoConst(items, overrides) {
   return `const SKILL_VIDEO = {
   title: ${JSON.stringify(ov.title || titleFromFileName(chosen.fileName) || "CapCut Skills Demo")},
   description: ${JSON.stringify(ov.description || "A demo of my editing skills — cuts, motion and grade.")},
-  thumbnail: "https://drive.google.com/thumbnail?id=${chosen.driveId}&sz=w1200",
+  thumbnail: "${thumbUrl(chosen.driveId, 640)}",
   mp4: "https://drive.google.com/uc?export=download&id=${chosen.driveId}",
 };`;
 }
@@ -133,7 +139,7 @@ function buildProjects(items, overrides) {
       category: ov.category || categoryFromName(title),
       description: ov.description ||
         "Fresh upload straight from my Drive folder — auto-synced to this portfolio.",
-      thumbnail: `https://drive.google.com/thumbnail?id=${driveId}&sz=w1200`,
+      thumbnail: thumbUrl(driveId, 480),
       mp4: `https://drive.google.com/uc?export=download&id=${driveId}`,
     };
   });
@@ -192,7 +198,7 @@ const SHOWREEL = {
   title: "2026 — The Showreel",
   description:
     "One screen. Every skill. A fast-cut journey through my editing — pacing, transitions, colour and sound working as one.",
-  thumbnail: "https://drive.google.com/thumbnail?id=${sr}&sz=w1200",
+  thumbnail: "${thumbUrl(sr, 960)}",
   mp4: "https://drive.google.com/uc?export=download&id=${sr}",
 };
 
